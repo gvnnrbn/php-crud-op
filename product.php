@@ -1,8 +1,6 @@
 <?php 
-    include 'connect.php';
     session_start();
-    $alertMessage = "";
-    $alertType = "";
+    include 'connect.php';
     
     if($_SERVER["REQUEST_METHOD"] == "POST"){
         $name = trim($_POST['name']);
@@ -21,13 +19,11 @@
             $_SESSION['alertMessage'] = "Error: " . $e->getMessage();
             $_SESSION['alertType'] = "danger";
         }
-        header("Location: " . $_SERVER['PHP_SELF']);
-        // directly to product table: header("location:listProduct.php")
+        mysqli_close($con);
+        //header("Location: " . $_SERVER['PHP_SELF']);
+        header("location: listProduct.php");
         exit();
     }
-    $alertMessage = $_SESSION['alertMessage'] ?? "";
-    $alertType = $_SESSION['alertType'] ?? "";
-    unset($_SESSION['alertMessage'], $_SESSION['alertType']);
 ?>
 
 <!doctype html>
@@ -52,12 +48,12 @@
             </div>
         </div>
     
-        <?php if (!empty($alertMessage)): ?>
+        <!-- <?php if (!empty($alertMessage)): ?>
             <div class="alert alert-<?= $alertType ?> alert-dismissible fade show" role="alert">
                 <?= $alertMessage ?>
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
-        <?php endif; ?>
+        <?php endif; ?> -->
     
         <form method="post">
             <div class="mb-3">

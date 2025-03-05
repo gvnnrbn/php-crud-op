@@ -1,5 +1,12 @@
 <?php 
+  session_start();
   include 'connect.php';
+
+  // handle delete/update alerts
+  $alertMessage = $_SESSION['alertMessage'] ?? "";
+  $alertType = $_SESSION['alertType'] ?? "";
+
+  unset($_SESSION['alertMessage'], $_SESSION['alertType']);
 ?>
 
 <!doctype html>
@@ -13,6 +20,14 @@
 
   <body>
     <h1>PRODUCTS</h1>
+
+    <?php if (!empty($alertMessage)): ?>
+        <div class="alert alert-<?= $alertType ?> alert-dismissible fade show" role="alert">
+            <?= $alertMessage ?>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    <?php endif; ?>
+
     <div class="container">
       <a type="button" class="btn btn-primary" href="product.php">
         NEW PRODUCT
@@ -46,7 +61,7 @@
                       <a href="update.php" class="text-light" style="text-decoration: none">Update</a>
                     </button>
                     <button class="btn btn-danger">
-                      <a href="delete.php" class="text-light" style="text-decoration: none">Delete</a>
+                      <a href="delete.php?deleteid='.$id.'" class="text-light" style="text-decoration: none">Delete</a>
                     </button>
                   </td>
                 </tr>';
