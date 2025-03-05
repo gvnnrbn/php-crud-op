@@ -2,6 +2,7 @@
     session_start();
     include 'connect.php';
     
+    /************  INSERT ****************/
     if($_SERVER["REQUEST_METHOD"] == "POST"){
         $name = trim($_POST['name']);
         $price = floatval($_POST['price']);
@@ -13,15 +14,16 @@
             mysqli_stmt_bind_param($stmt, "sd", $name, $price);
             mysqli_stmt_execute($stmt);
 
-            $_SESSION['alertMessage'] = "Product created successfully!";
+            $_SESSION['alertMessage'] = "$name created successfully!";
             $_SESSION['alertType'] = "success";
         }catch (mysqli_sql_exception $e) {
             $_SESSION['alertMessage'] = "Error: " . $e->getMessage();
             $_SESSION['alertType'] = "danger";
         }
+        mysqli_stmt_close($stmt);
         mysqli_close($con);
         //header("Location: " . $_SERVER['PHP_SELF']);
-        header("location: listProduct.php");
+        header("location: list.php");
         exit();
     }
 ?>
@@ -47,13 +49,6 @@
                 </a>
             </div>
         </div>
-    
-        <!-- <?php if (!empty($alertMessage)): ?>
-            <div class="alert alert-<?= $alertType ?> alert-dismissible fade show" role="alert">
-                <?= $alertMessage ?>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-        <?php endif; ?> -->
     
         <form method="post">
             <div class="mb-3">

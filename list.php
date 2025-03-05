@@ -29,7 +29,7 @@
     <?php endif; ?>
 
     <div class="container">
-      <a type="button" class="btn btn-primary" href="product.php">
+      <a type="button" class="btn btn-primary" href="create.php">
         NEW PRODUCT
       </a>
     </div>
@@ -58,7 +58,7 @@
                   <td>'.$price.'</td>
                   <td>
                     <button class="btn btn-primary">
-                      <a href="update.php" class="text-light" style="text-decoration: none">Update</a>
+                      <a href="update.php?updateid='.$id.'" class="text-light" style="text-decoration: none">Update</a>
                     </button>
                     <button class="btn btn-danger">
                       <a href="delete.php?deleteid='.$id.'" class="text-light" style="text-decoration: none">Delete</a>

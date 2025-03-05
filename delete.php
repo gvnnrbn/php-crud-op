@@ -1,6 +1,6 @@
 <?php
     session_start();
-    
+
     include 'connect.php';
     
     $alertMessage = "";
@@ -16,15 +16,15 @@
             mysqli_stmt_bind_param($stmt,"i", $id);
             mysqli_stmt_execute($stmt);
 
-            $_SESSION['alertMessage'] = "Product deleted successfully!";
+            $_SESSION['alertMessage'] = "Product $id deleted successfully!";
             $_SESSION['alertType'] = "success";
         }catch (mysqli_sql_exception $e) {
             $_SESSION['alertMessage'] = "Error: " . $e->getMessage();
             $_SESSION['alertType'] = "danger";
         }
+        mysqli_stmt_close($stmt);
         mysqli_close($con);
-
-        header("location: listProduct.php ");
+        header("location: list.php ");
         exit();
     }
 ?>

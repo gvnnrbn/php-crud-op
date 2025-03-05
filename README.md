@@ -1,2 +1,3 @@
 # php-crud-op
-php crud operations products and orders
+> PHP + mysql (statements)
+> SESSIONS for alerts + alternative if syntax
